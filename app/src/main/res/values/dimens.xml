@@ -4,6 +4,8 @@
     <dimen name="mb_spinner_deteksi">10dp</dimen>
     <dimen name="default_icon_size">24dp</dimen>
     <dimen name="default_spinner_size">36dp</dimen>
-    <dimen name="default_question_deteksi">16sp</dimen>
+    <dimen name="default_question_deteksi">18sp</dimen>
+    <dimen name="icon_question">150dp</dimen>
+    <dimen name="height_yesno_question">180dp</dimen>
 
 </resources>

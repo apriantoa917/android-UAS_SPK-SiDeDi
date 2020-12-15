@@ -16,8 +16,8 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <ImageView
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="@dimen/icon_question"
+                android:layout_height="@dimen/icon_question"
                 android:layout_gravity="center"
                 android:background="@drawable/ic_usia"
                 android:layout_marginVertical="50dp"/>
@@ -39,7 +39,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/default_space"
                 android:text="20 - 40 Tahun"
-                style="@style/button_question_deteksi"/>
+                style="@style/button_question_deteksi"
+                />
             <Button
                 android:id="@+id/usia_40_50"
                 android:layout_width="match_parent"

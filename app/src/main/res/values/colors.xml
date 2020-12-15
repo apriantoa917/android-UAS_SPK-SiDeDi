@@ -5,6 +5,8 @@
     <color name="colorAccent">#4ABDAC</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
+    <color name="btn_grey">#BDBDBD</color>
+    <color name="btn_grey_pressed">#919191</color>
     <color name="spinner_element">#707070</color>
 
 </resources>

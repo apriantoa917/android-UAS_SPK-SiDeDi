@@ -10,11 +10,23 @@
     <style name="text_question_deteksi">
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">@dimen/default_question_deteksi</item>
+        <item name="android:textStyle">bold</item>
     </style>
     <style name="button_question_deteksi">
         <item name="android:background">@drawable/custom_button</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textColor">@drawable/custom_button_color</item>
     </style>
-
+    <style name="label_option_question">
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:textColor">@drawable/custom_button_color</item>
+        <item name="android:textSize">@dimen/default_question_deteksi</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="button_question_deteksi_clicked">
+        <item name="android:background">@drawable/custom_button_clicked</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@drawable/custom_button_color_clicked</item>
+    </style>
 </resources>

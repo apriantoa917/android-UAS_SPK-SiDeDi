@@ -11,23 +11,17 @@
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorAccent">
+        android:background="@color/white">
         <ImageView
             android:id="@+id/btn_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_arrow_back"
-            android:padding="@dimen/default_space"/>
-        <TextView
-            android:layout_toRightOf="@id/btn_back"
-            android:layout_centerVertical="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Deteksi Diabetes"
-            android:textSize="16sp"
-            android:textColor="@color/white"
-            android:textStyle="bold"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_no"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_alignParentRight="true"
             />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

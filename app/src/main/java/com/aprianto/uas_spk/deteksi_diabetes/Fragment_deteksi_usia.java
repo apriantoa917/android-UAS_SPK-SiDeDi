@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,30 +29,63 @@ public class Fragment_deteksi_usia extends Fragment {
             @Override
             public void onClick(View view) {
                 next();
-                ((DeteksiDiabetes)getActivity()).setVar("usia","20-40");
+                ((DeteksiDiabetes)getActivity()).setVariabelValue("usia","20-40");
             }
         });
         btn_40_50.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 next();
-                ((DeteksiDiabetes)getActivity()).setVar("usia","40-50");
+                ((DeteksiDiabetes)getActivity()).setVariabelValue("usia","40-50");
             }
         });
         btn_50_60.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 next();
-                ((DeteksiDiabetes)getActivity()).setVar("usia","50-60");
+                ((DeteksiDiabetes)getActivity()).setVariabelValue("usia","50-60");
             }
         });
-
+        setStateButton();
         return view;
 
     }
 
+    void setStateButton(){
+        String val = ((DeteksiDiabetes)getActivity()).getVariabelValue("usia");
+        if(val.isEmpty()){
+//            button belum dipilih
+            setClickedButton(btn_20_40,"unclicked");
+            setClickedButton(btn_40_50,"unclicked");
+            setClickedButton(btn_50_60,"unclicked");
+        }else if(val.equalsIgnoreCase("20-40")){
+            setClickedButton(btn_20_40,"clicked");
+        }
+        else if(val.equalsIgnoreCase("40-50")){
+            setClickedButton(btn_40_50,"clicked");
+        }
+        else if(val.equalsIgnoreCase("50-60")){
+            setClickedButton(btn_50_60,"clicked");
+        }
+    }
+
+    void setClickedButton(Button button, String state){
+        if(state.equalsIgnoreCase("clicked")){
+            button.setBackground(getResources().getDrawable(R.drawable.custom_button_clicked));
+            button.setTextColor(getResources().getColor(R.color.white));
+
+        }else if(state.equalsIgnoreCase("unclicked")){
+            button.setBackground(getResources().getDrawable(R.drawable.custom_button));
+            button.setTextColor(getResources().getColor(R.color.colorAccent));
+        }
+
+    }
+
+
+
+
+
     void next(){
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new Fragment_deteksi_jkel()).commit();
-        ((DeteksiDiabetes)getActivity()).setText("maju");
     }
 }
