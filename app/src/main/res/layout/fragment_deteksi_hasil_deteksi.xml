@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#4ABDAC">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:padding="@dimen/default_space"
+        >
+        <ImageView
+            android:layout_width="@dimen/icon_question"
+            android:layout_height="@dimen/icon_question"
+            android:layout_gravity="center"
+            android:background="@drawable/ic_vonis_no"
+            android:layout_marginVertical="@dimen/default_space"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Selamat !"
+            android:layout_marginHorizontal="@dimen/default_space"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/white"
+            android:textSize="21sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="@dimen/default_space"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Selamat Anda tidak memiliki potensi diabetes"
+            android:layout_marginHorizontal="@dimen/default_space"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:layout_marginBottom="@dimen/default_space"/>
+    </LinearLayout>
+</RelativeLayout>

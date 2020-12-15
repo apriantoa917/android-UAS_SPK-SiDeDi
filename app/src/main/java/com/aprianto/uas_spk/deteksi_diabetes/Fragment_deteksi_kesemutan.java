@@ -17,7 +17,7 @@ import androidx.fragment.app.Fragment;
 import com.aprianto.uas_spk.R;
 
 public class Fragment_deteksi_kesemutan extends Fragment {
-    ImageButton btn_prev_question;
+    ImageButton btn_prev_question, btn_finish;
     ImageView kesemutan_yes, kesemutan_no, ic_yes, ic_no, icon;
     TextView tv_yes, tv_no, tv_question;
 
@@ -39,6 +39,16 @@ public class Fragment_deteksi_kesemutan extends Fragment {
             }
         });
 
+        btn_finish = view.findViewById(R.id.btn_finish);
+        btn_finish.setVisibility(View.VISIBLE);
+        btn_finish.setEnabled(false);
+        btn_finish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Fragment_deteksi_vonis()).commit();
+            }
+        });
+
         icon = view.findViewById(R.id.icon);
         icon.setBackground(getResources().getDrawable(R.drawable.ic_kesemutan));
 
@@ -54,23 +64,22 @@ public class Fragment_deteksi_kesemutan extends Fragment {
         kesemutan_yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                next_question("kesemutan", "ya");
+                finish("kesemutan", "ya");
             }
         });
         kesemutan_no.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                next_question("kesemutan", "tidak");
+                finish("kesemutan", "tidak");
             }
         });
         setStateButton();
         return view;
     }
     
-    void next_question(String var, String val) {
+    void finish(String var, String val) {
         ((DeteksiDiabetes) getActivity()).setVariabelValue(var, val);
-//        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Fragment_deteksi_kesemutan()).commit();
-        showDialog(getContext());
+        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Fragment_deteksi_kesemutan()).commit();
     }
 
     void showDialog(Context context) {
@@ -98,6 +107,17 @@ public class Fragment_deteksi_kesemutan extends Fragment {
         } else if (val.equalsIgnoreCase("tidak")) {
             setClickedButton(kesemutan_no, ic_no, tv_no, "no", "clicked");
         }
+
+        // set warna dan disabilitas button next ketika belum memilih
+        if(val.isEmpty()){
+            btn_finish.setEnabled(false);
+            btn_finish.setBackground(getResources().getDrawable(R.drawable.custom_button_prev));
+
+        }else {
+            btn_finish.setEnabled(true);
+            btn_finish.setBackground(getResources().getDrawable(R.drawable.custom_button_yes));
+        }
+
     }
 
     void setClickedButton(ImageView button, ImageView icon, TextView tv, String value, String state) {
@@ -119,4 +139,5 @@ public class Fragment_deteksi_kesemutan extends Fragment {
             }
         }
     }
+
 }
