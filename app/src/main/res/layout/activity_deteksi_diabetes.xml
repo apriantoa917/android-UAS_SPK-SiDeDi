@@ -10,22 +10,16 @@
     <RelativeLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:background="@color/white">
         <ImageView
             android:id="@+id/btn_close"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/ic_no"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_width="50dp"
             android:layout_alignParentRight="true"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_no"
+            android:layout_margin="@dimen/default_space"
             />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/texttest"/>
     </RelativeLayout>
     <FrameLayout
         android:id="@+id/fragment_container"

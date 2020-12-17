@@ -12,6 +12,10 @@
         <item name="android:textSize">@dimen/default_question_deteksi</item>
         <item name="android:textStyle">bold</item>
     </style>
+    <style name="text_hasil_deteksi">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">14sp</item>
+    </style>
     <style name="button_question_deteksi">
         <item name="android:background">@drawable/custom_button</item>
         <item name="android:textAllCaps">false</item>

@@ -7,5 +7,7 @@
     <dimen name="default_question_deteksi">18sp</dimen>
     <dimen name="icon_question">150dp</dimen>
     <dimen name="height_yesno_question">180dp</dimen>
+    <dimen name="hasil_deteksi_kiri">65</dimen>
+    <dimen name="hasil_deteksi_kanan">35</dimen>
 
 </resources>

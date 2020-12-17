@@ -1,6 +1,9 @@
 package com.aprianto.uas_spk.deteksi_diabetes;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -27,14 +30,31 @@ public class DeteksiDiabetes extends AppCompatActivity {
     ImageView btn_back;
     RelativeLayout header;
     boolean state_close = false;
+
+    RelativeLayout background_hasil_deteksi;
+    ImageView ic_hasil_deteksi;
+    TextView greetings_hasil_deteksi, kalimat_hasil_deteksi;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_deteksi_diabetes);
         getSupportActionBar().hide();
         getSupportFragmentManager().beginTransaction().add(R.id.fragment_container,new Fragment_deteksi_usia()).commit();
+
         header = findViewById(R.id.header);
         btn_back = findViewById(R.id.btn_close);
+        background_hasil_deteksi = findViewById(R.id.background_hasil_deteksi);
+        ic_hasil_deteksi = findViewById(R.id.icon_hasil_deteksi);
+        greetings_hasil_deteksi = findViewById(R.id.greetings_deteksi);
+        kalimat_hasil_deteksi = findViewById(R.id.kalimat_deteksi);
+
+
+
+
+
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -153,11 +173,15 @@ public class DeteksiDiabetes extends AppCompatActivity {
             case "kulit_gatal":
                 val = val_kulit_gatal;
                 break;
+            case "hasil_deteksi":
+                val = hasil_deteksi;
+                break;
         }
         return val;
     }
 
     String outputs = "";
+    String hasil_deteksi = "";
 
     public void deteksi() {
 
@@ -186,15 +210,16 @@ public class DeteksiDiabetes extends AppCompatActivity {
                         outputs = response.toString();
 
 
-                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DeteksiDiabetes.this);
-                        // set title dialog
-                        alertDialogBuilder.setTitle("HASIL TEST DIABETES");
-                        // set pesan dari dialog
-                        alertDialogBuilder
-                                .setMessage(outputs)
-                                .setCancelable(true);
-                        AlertDialog alertDialog = alertDialogBuilder.create();
-                        alertDialog.show();
+
+//                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DeteksiDiabetes.this);
+//                        // set title dialog
+//                        alertDialogBuilder.setTitle("HASIL TEST DIABETES");
+//                        // set pesan dari dialog
+//                        alertDialogBuilder
+//                                .setMessage(outputs)
+//                                .setCancelable(true);
+//                        AlertDialog alertDialog = alertDialogBuilder.create();
+//                        alertDialog.show();
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -225,5 +250,18 @@ public class DeteksiDiabetes extends AppCompatActivity {
         state_close = true;
     }
 
+    void vonis_tidak_terdeteksi(){
+        background_hasil_deteksi.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+        ic_hasil_deteksi.setBackground(getDrawable(R.drawable.ic_vonis_tidak));
+        greetings_hasil_deteksi.setText("Selamat !!!");
+        kalimat_hasil_deteksi.setText("Anda tidak berpotensi terkena diabetes");
+    }
+
+    void vonis_terdeteksi (){
+        background_hasil_deteksi.setBackgroundColor(getResources().getColor(R.color.red));
+        ic_hasil_deteksi.setBackground(getDrawable(R.drawable.ic_vonis_ya));
+        greetings_hasil_deteksi.setText("Waspada !!!");
+        kalimat_hasil_deteksi.setText("Anda berpotensi terkena diabetes, segera lakukan tes lebih lanjut kondisi anda !");
+    }
 
 }

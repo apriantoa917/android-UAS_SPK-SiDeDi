@@ -1,41 +1,46 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<com.sothree.slidinguppanel.SlidingUpPanelLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:sothree="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/sliding_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#4ABDAC">
+    android:gravity="bottom"
+    sothree:umanoPanelHeight="40dp"
+    sothree:umanoShadowHeight="4dp"
+    sothree:umanoParallaxOffset="100dp"
+    sothree:umanoDragView="@+id/dragView"
+    sothree:umanoOverlay="true">
+
+    <!-- MAIN CONTENT -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <include layout="@layout/fragment_deteksi_hasil_deteksi_content"/>
+
+    </FrameLayout>
+
+    <!-- SLIDING LAYOUT -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:background="#ffffff"
         android:orientation="vertical"
-        android:layout_centerInParent="true"
-        android:padding="@dimen/default_space"
-        >
-        <ImageView
-            android:layout_width="@dimen/icon_question"
-            android:layout_height="@dimen/icon_question"
-            android:layout_gravity="center"
-            android:background="@drawable/ic_vonis_no"
-            android:layout_marginVertical="@dimen/default_space"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Selamat !"
-            android:layout_marginHorizontal="@dimen/default_space"
-            android:layout_gravity="center_horizontal"
-            android:textColor="@color/white"
-            android:textSize="21sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="@dimen/default_space"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Selamat Anda tidak memiliki potensi diabetes"
-            android:layout_marginHorizontal="@dimen/default_space"
-            android:layout_gravity="center_horizontal"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            android:layout_marginBottom="@dimen/default_space"/>
+        android:clickable="true"
+        android:focusable="false"
+        android:id="@+id/dragView">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center">
+            <ImageView
+                android:layout_margin="8dp"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="10dp"
+                android:src="@drawable/ic_swipe"/>
+        </LinearLayout>
+        <include layout="@layout/fragment_deteksi_hasil_deteksi_detail"/>
     </LinearLayout>
-</RelativeLayout>
+</com.sothree.slidinguppanel.SlidingUpPanelLayout>
