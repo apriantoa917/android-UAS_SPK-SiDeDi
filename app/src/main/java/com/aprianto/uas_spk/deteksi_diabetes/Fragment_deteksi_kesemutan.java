@@ -45,7 +45,7 @@ public class Fragment_deteksi_kesemutan extends Fragment {
         btn_finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Fragment_deteksi_vonis()).commit();
+                ((DeteksiDiabetes) getActivity()).deteksi();
             }
         });
 

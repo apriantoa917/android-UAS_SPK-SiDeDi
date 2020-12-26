@@ -8,16 +8,19 @@ import androidx.fragment.app.FragmentTransaction;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.aprianto.uas_spk.R;
 
@@ -27,13 +30,14 @@ import org.json.JSONObject;
 public class DeteksiDiabetes extends AppCompatActivity {
     public static final String url = "http://192.168.1.104/uas_spk/deteksi.php";
     String val_usia, val_jkel, val_keturunan, val_banyak_kencing, val_turun_bb, val_luka_sukar, val_kesemutan, val_lemas, val_kulit_gatal ;
-    ImageView btn_back;
+    ImageView btn_close;
     RelativeLayout header;
     boolean state_close = false;
 
     RelativeLayout background_hasil_deteksi;
     ImageView ic_hasil_deteksi;
     TextView greetings_hasil_deteksi, kalimat_hasil_deteksi;
+
 
 
 
@@ -45,17 +49,17 @@ public class DeteksiDiabetes extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().add(R.id.fragment_container,new Fragment_deteksi_usia()).commit();
 
         header = findViewById(R.id.header);
-        btn_back = findViewById(R.id.btn_close);
+        btn_close = findViewById(R.id.btn_close);
         background_hasil_deteksi = findViewById(R.id.background_hasil_deteksi);
         ic_hasil_deteksi = findViewById(R.id.icon_hasil_deteksi);
         greetings_hasil_deteksi = findViewById(R.id.greetings_deteksi);
         kalimat_hasil_deteksi = findViewById(R.id.kalimat_deteksi);
 
+        getWindow().setStatusBarColor(this.getResources().getColor(R.color.white));
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 
 
-
-
-        btn_back.setOnClickListener(new View.OnClickListener() {
+        btn_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(state_close){
@@ -202,66 +206,46 @@ public class DeteksiDiabetes extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, postData,
-                new Response.Listener<JSONObject>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
                     @Override
-                    public void onResponse(JSONObject response) {
-                        outputs = "";
-                        outputs = response.toString();
-
-
-
-//                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DeteksiDiabetes.this);
-//                        // set title dialog
-//                        alertDialogBuilder.setTitle("HASIL TEST DIABETES");
-//                        // set pesan dari dialog
-//                        alertDialogBuilder
-//                                .setMessage(outputs)
-//                                .setCancelable(true);
-//                        AlertDialog alertDialog = alertDialogBuilder.create();
-//                        alertDialog.show();
+                    public void onResponse(String response) {
+                        Fragment_deteksi_vonis fragment_deteksi_vonis = new Fragment_deteksi_vonis();
+                        Bundle bundle = new Bundle();
+                        bundle.putString("vonis",response);
+                        fragment_deteksi_vonis.setArguments(bundle);
+                        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container,fragment_deteksi_vonis).commit();
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DeteksiDiabetes.this);
-                alertDialogBuilder
-                        .setMessage(error.toString())
-                        .setCancelable(true);
-                final AlertDialog alertDialog = alertDialogBuilder.create();
-                alertDialog.show();
-                alertDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                    @Override
-                    public void onCancel(DialogInterface dialogInterface) {
-                        finish();
-                        startActivity(getIntent());
-                    }
-                });
+                Fragment_deteksi_vonis fragment_deteksi_vonis = new Fragment_deteksi_vonis();
+                Bundle bundle = new Bundle();
+                bundle.putString("vonis","eror");
+                fragment_deteksi_vonis.setArguments(bundle);
+                getSupportFragmentManager().beginTransaction().add(R.id.fragment_container,fragment_deteksi_vonis).commit();
             }
         });
-        requestQueue.add(jsonObjectRequest);
+        requestQueue.add(stringRequest);
     }
 
-    void vonis_exit(){
-        header.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-        btn_back.setColorFilter(getResources().getColor(R.color.white));
+
+
+    void keluar_menu_deteksi(String vonis){
+        btn_close.setColorFilter(getResources().getColor(R.color.white));
+        switch (vonis){
+            case "ya":
+                header.setBackgroundColor(getResources().getColor(R.color.red));
+                break;
+            case "tidak":
+                header.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                break;
+            default:
+                header.setBackgroundColor(getResources().getColor(R.color.yellow));
+                break;
+        }
         state_close = true;
     }
 
-    void vonis_tidak_terdeteksi(){
-        background_hasil_deteksi.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-        ic_hasil_deteksi.setBackground(getDrawable(R.drawable.ic_vonis_tidak));
-        greetings_hasil_deteksi.setText("Selamat !!!");
-        kalimat_hasil_deteksi.setText("Anda tidak berpotensi terkena diabetes");
-    }
-
-    void vonis_terdeteksi (){
-        background_hasil_deteksi.setBackgroundColor(getResources().getColor(R.color.red));
-        ic_hasil_deteksi.setBackground(getDrawable(R.drawable.ic_vonis_ya));
-        greetings_hasil_deteksi.setText("Waspada !!!");
-        kalimat_hasil_deteksi.setText("Anda berpotensi terkena diabetes, segera lakukan tes lebih lanjut kondisi anda !");
-    }
 
 }

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#F5F6FA"
+    tools:context=".deteksi_diabetes.DeteksiDiabetes">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:id="@+id/header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custome_home_shape"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="12dp"
+                    android:gravity="center_horizontal">
+
+                    <ImageView
+                        android:id="@+id/logo"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:src="@drawable/logo" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/default_space"
+                        android:layout_toEndOf="@id/logo"
+                        android:text="SiDeDi"
+                        android:textColor="@color/white"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/default_space"
+                    android:layout_marginVertical="24dp">
+
+                    <TextView
+                        android:id="@+id/greetings_home"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Selamat xxx,"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/btn_info"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:src="@drawable/ic_info" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <HorizontalScrollView
+                android:id="@+id/scrollView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/header"
+                android:layout_margin="@dimen/default_space"
+                android:scrollIndicators="none"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/card1"
+                        android:layout_width="@dimen/w_card_home"
+                        android:layout_height="@dimen/h_card_home"
+                        android:layout_marginRight="@dimen/default_space"
+                        android:src="@drawable/card1" />
+
+                    <ImageView
+                        android:id="@+id/card2"
+                        android:layout_width="@dimen/w_card_home"
+                        android:layout_height="@dimen/h_card_home"
+                        android:layout_marginRight="@dimen/default_space"
+                        android:src="@drawable/card2" />
+
+                    <ImageView
+                        android:id="@+id/card3"
+                        android:layout_width="@dimen/w_card_home"
+                        android:layout_height="@dimen/h_card_home"
+                        android:layout_marginRight="@dimen/default_space"
+                        android:src="@drawable/card3" />
+
+                    <ImageView
+                        android:id="@+id/card4"
+                        android:layout_width="220dp"
+                        android:layout_height="@dimen/h_card_home"
+                        android:src="@drawable/card4" />
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/scrollView"
+                android:layout_marginBottom="60dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:padding="@dimen/default_space">
+
+                <TextView
+                    android:id="@+id/label_artikel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/default_space"
+                    android:text="Artikel"
+                    android:textColor="@color/black"
+                    android:textSize="21sp" />
+
+                <ProgressBar
+                    android:layout_below="@id/label_artikel"
+                    android:id="@+id/progressbar"
+                    android:visibility="visible"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_artikel"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/label_artikel"
+                    android:overScrollMode="never"
+                    tools:itemCount="5"
+                    tools:listitem="@layout/list_rv_berita" />
+            </RelativeLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/custom_nav_shadow"
+        android:orientation="vertical"
+        android:padding="12dp">
+
+        <RelativeLayout
+            android:id="@+id/btn_deteksi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true">
+
+            <ImageView
+                android:id="@+id/scan"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/ic_scan" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/scan"
+                android:layout_centerHorizontal="true"
+                android:text="Deteksi Diabetes"
+                android:textColor="@color/colorAccent"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

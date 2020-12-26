@@ -57,13 +57,8 @@ public class Fragment_deteksi_keturunan extends Fragment {
                 next_question("keturunan", "tidak");
             }
         });
-
         setStateButton();
-
-
         return view;
-
-
     }
 
     void next_question(String var, String val) {
@@ -71,23 +66,10 @@ public class Fragment_deteksi_keturunan extends Fragment {
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Fragment_deteksi_banyak_kencing()).commit();
     }
 
-    void showDialog(Context context) {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
-        // set title dialog
-        alertDialogBuilder.setTitle("HASIL TEST DIABETES");
-        // set pesan dari dialog
-        alertDialogBuilder
-                .setMessage(((DeteksiDiabetes) getActivity()).testDialog())
-                .setCancelable(true);
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
-
-    }
-
     void setStateButton() {
         String val = ((DeteksiDiabetes) getActivity()).getVariabelValue("keturunan");
         if (val.isEmpty()) {
-//            button belum dipilih
+            // button belum dipilih
             setClickedButton(keturunan_yes, ic_yes, tv_yes, "yes", "unclicked");
             setClickedButton(keturunan_no, ic_no, tv_no, "no", "unclicked");
         } else if (val.equalsIgnoreCase("ya")) {

@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="#1113"
-    tools:context=".deteksi_diabetes.DeteksiDiabetes">
+    android:background="#1113">
 
     <RelativeLayout
         android:id="@+id/header"
@@ -21,6 +20,7 @@
             android:layout_margin="@dimen/default_space"
             />
     </RelativeLayout>
+    
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"

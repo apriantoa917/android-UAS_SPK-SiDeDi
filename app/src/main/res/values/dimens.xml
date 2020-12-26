@@ -9,5 +9,6 @@
     <dimen name="height_yesno_question">180dp</dimen>
     <dimen name="hasil_deteksi_kiri">65</dimen>
     <dimen name="hasil_deteksi_kanan">35</dimen>
-
+    <dimen name="w_card_home">180dp</dimen>
+    <dimen name="h_card_home">120dp</dimen>
 </resources>

@@ -55,9 +55,6 @@ public class Fragment_deteksi_jkel extends Fragment {
         });
 
         setStateButton();
-
-
-
         return view;
 
 

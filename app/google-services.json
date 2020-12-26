@@ -1,0 +1,77 @@
+{
+  "project_info": {
+    "project_number": "804209846339",
+    "firebase_url": "https://uas-spk-default-rtdb.firebaseio.com",
+    "project_id": "uas-spk",
+    "storage_bucket": "uas-spk.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:804209846339:android:e715d455cb21906e920cf6",
+        "android_client_info": {
+          "package_name": "com.aprianto.uas_spk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "804209846339-mnqc3ir8cr3afiac0hpcrbmar0au9rh8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDa8EjoXqwAFAmH7skzPaSkFZzRuCaJexE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "804209846339-mnqc3ir8cr3afiac0hpcrbmar0au9rh8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:804209846339:android:c3cfc028bf58e474920cf6",
+        "android_client_info": {
+          "package_name": "com.aprianto.uas_spk.deteksi_diabetes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "804209846339-cki12808teub8n87i8g55lnh5e6d36c1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aprianto.uas_spk.deteksi_diabetes",
+            "certificate_hash": "82dd2a43789843ac9603ee67368fd4adad3e65e4"
+          }
+        },
+        {
+          "client_id": "804209846339-mnqc3ir8cr3afiac0hpcrbmar0au9rh8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDa8EjoXqwAFAmH7skzPaSkFZzRuCaJexE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "804209846339-mnqc3ir8cr3afiac0hpcrbmar0au9rh8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
