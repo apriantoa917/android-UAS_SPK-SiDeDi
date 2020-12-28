@@ -5,11 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -28,15 +32,18 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class HomeActivity extends AppCompatActivity {
+import de.hdodenhof.circleimageview.CircleImageView;
 
+public class HomeActivity extends AppCompatActivity {
+    Dialog dialog;
     RelativeLayout btn_deteksi;
     ArrayList<com.aprianto.uas_spk.deteksi_diabetes.konten_berita.model> list = new ArrayList<>();
     DatabaseReference db;
     RecyclerView rv;
-    ImageView c1,c2,c3,c4;
+    ImageView c1,c2,c3,c4, btn_info, btn_close_info;
     ProgressBar progressBar;
     TextView label_greetings;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +55,8 @@ public class HomeActivity extends AppCompatActivity {
         c2 = findViewById(R.id.card2);
         c3 = findViewById(R.id.card3);
         c4 = findViewById(R.id.card4);
+        btn_info = findViewById(R.id.btn_info);
+
         progressBar = findViewById(R.id.progressbar);
         progressBar.setVisibility(View.VISIBLE);
         label_greetings = findViewById(R.id.greetings_home);
@@ -64,21 +73,68 @@ public class HomeActivity extends AppCompatActivity {
         c2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                load_webview("https://uas-spk.web.app/pengertian_diabetes.html");
             }
         });
         c3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                load_webview("https://uas-spk.web.app/gejala_diabetes.html");
             }
         });
         c4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                load_webview("https://uas-spk.web.app/tips_diabetes.html");
             }
         });
+
+
+        btn_info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog  = new Dialog(HomeActivity.this);
+                dialog.setContentView(R.layout.dialog_info_apps);
+                WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
+                params.width = WindowManager.LayoutParams.MATCH_PARENT;
+                params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+
+                CircleImageView ic_apri, ic_onas, ic_reva;
+                ic_apri = dialog.findViewById(R.id.ic_apri);
+                ic_reva = dialog.findViewById(R.id.ic_reva);
+                ic_onas = dialog.findViewById(R.id.ic_onas);
+
+                ic_apri.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        load_webview("http://instagram.com/aprianto.si");
+                    }
+                });
+                ic_reva.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        load_webview("http://instagram.com/revaekap");
+                    }
+                });
+                ic_onas.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        load_webview("http://instagram.com/onastatia_");
+                    }
+                });
+
+                btn_close_info = dialog.findViewById(R.id.btn_close_info);
+                btn_close_info.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
+            }
+        });
+
 
         btn_deteksi = findViewById(R.id.btn_deteksi);
         btn_deteksi.setOnClickListener(new View.OnClickListener() {
@@ -113,7 +169,7 @@ public class HomeActivity extends AppCompatActivity {
                     String url_berita = data.child("url_berita").getValue().toString();
                     String icon_berita = data.child("icon_berita").getValue().toString();
                     String foto_berita = data.child("foto_berita").getValue().toString();
-//                    Log.e("APRI",judul_berita);
+//                    Log.e("ic_apri",judul_berita);
                     model model = new model();
                     model.setJudul_berita(judul_berita);
                     model.setUrl_berita(url_berita);

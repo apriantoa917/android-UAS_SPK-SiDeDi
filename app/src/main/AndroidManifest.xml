@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.aprianto.uas_spk">
-
     <uses-permission android:name="android.permission.INTERNET" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -13,7 +11,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".deteksi_diabetes.WebviewActivity"></activity>
-        <activity android:name=".deteksi_diabetes.DeteksiDiabetes" />
+        <activity android:name=".deteksi_diabetes.DeteksiDiabetes"></activity>
         <activity android:name=".deteksi_diabetes.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,5 +20,4 @@
             </intent-filter>
         </activity>
     </application>
-
 </manifest>

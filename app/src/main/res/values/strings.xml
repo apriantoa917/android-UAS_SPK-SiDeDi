@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">UAS_SPK</string>
+    <string name="app_name">SiDeDi</string>
+    <string name="deskripsi_sidedi">SiDeDi merupakan aplikasi android untuk mendeteksi dini penyakit diabetes menggunakan Metode Naive Bayes Classifier</string>
 </resources>

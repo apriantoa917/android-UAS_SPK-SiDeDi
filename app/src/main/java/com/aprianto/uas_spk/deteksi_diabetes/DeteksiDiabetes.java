@@ -6,10 +6,14 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -33,6 +37,8 @@ public class DeteksiDiabetes extends AppCompatActivity {
     ImageView btn_close;
     RelativeLayout header;
     boolean state_close = false;
+
+    Dialog dialog;
 
     RelativeLayout background_hasil_deteksi;
     ImageView ic_hasil_deteksi;
@@ -99,7 +105,26 @@ public class DeteksiDiabetes extends AppCompatActivity {
         val_lemas = "";
         val_kulit_gatal = "";
 
+        dialog  = new Dialog(DeteksiDiabetes.this);
+        dialog.setContentView(R.layout.dialog_loading);
+        WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
+        params.width = WindowManager.LayoutParams.MATCH_PARENT;
+        params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.setCancelable(false);
+
+
     }
+
+    void show_loading(){
+        this.dialog.show();
+    }
+
+    void hide_loading(){
+        this.dialog.dismiss();
+    }
+
+
 
     String testDialog(){
         return "Hasil \n " +"\n " +
@@ -188,6 +213,7 @@ public class DeteksiDiabetes extends AppCompatActivity {
     String hasil_deteksi = "";
 
     public void deteksi() {
+        show_loading();
 
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
 
@@ -210,6 +236,7 @@ public class DeteksiDiabetes extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        hide_loading();
                         Fragment_deteksi_vonis fragment_deteksi_vonis = new Fragment_deteksi_vonis();
                         Bundle bundle = new Bundle();
                         bundle.putString("vonis",response);
@@ -219,14 +246,18 @@ public class DeteksiDiabetes extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                hide_loading();
                 Fragment_deteksi_vonis fragment_deteksi_vonis = new Fragment_deteksi_vonis();
                 Bundle bundle = new Bundle();
                 bundle.putString("vonis","eror");
                 fragment_deteksi_vonis.setArguments(bundle);
                 getSupportFragmentManager().beginTransaction().add(R.id.fragment_container,fragment_deteksi_vonis).commit();
             }
+
         });
+
         requestQueue.add(stringRequest);
+
     }
 
 

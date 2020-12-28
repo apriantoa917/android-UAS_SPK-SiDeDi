@@ -92,7 +92,7 @@
                         android:layout_marginRight="@dimen/default_space"
                         android:src="@drawable/card1" />
 
-                    <ImageView
+                     <ImageView
                         android:id="@+id/card2"
                         android:layout_width="@dimen/w_card_home"
                         android:layout_height="@dimen/h_card_home"
@@ -183,8 +183,5 @@
                 android:textColor="@color/colorAccent"
                 android:textSize="14sp" />
         </RelativeLayout>
-
     </RelativeLayout>
-
-
 </RelativeLayout>
