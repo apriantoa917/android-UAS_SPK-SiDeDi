@@ -34,7 +34,6 @@ public class Fragment_deteksi_vonis extends Fragment {
     String vonis;
 
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -70,8 +69,8 @@ public class Fragment_deteksi_vonis extends Fragment {
         return view;
     }
 
-    void set_layout(String vonis){
-        switch (vonis){
+    void set_layout(String vonis) {
+        switch (vonis) {
             case "ya":
                 bg_hasil_deteksi.setBackgroundColor(getResources().getColor(R.color.red));
                 ic_hasil_deteksi.setBackground(getResources().getDrawable(R.drawable.ic_vonis_ya));
@@ -88,9 +87,10 @@ public class Fragment_deteksi_vonis extends Fragment {
                 bg_hasil_deteksi.setBackgroundColor(getResources().getColor(R.color.yellow));
                 ic_hasil_deteksi.setBackground(getResources().getDrawable(R.drawable.ic_eror));
                 tv_greetings_deteksi.setText("Eror !!!");
-                tv_detail_deteksi.setText("Hmm, anda tidak dapat berkomunikasi dengan sistem");
+                tv_detail_deteksi.setText("Hmm, anda tidak dapat berkomunikasi dengan sistem : " + getArguments().getString("err_msg"));
                 break;
         }
+//        tv_greetings_deteksi.setText(vonis);
         ((DeteksiDiabetes) getActivity()).keluar_menu_deteksi(vonis);
     }
 }

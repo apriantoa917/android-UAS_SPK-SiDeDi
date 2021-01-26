@@ -19,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -31,8 +32,11 @@ import com.aprianto.uas_spk.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class DeteksiDiabetes extends AppCompatActivity {
-    public static final String url = "http://192.168.1.104/uas_spk/deteksi.php";
+    public static final String url = "http://192.168.1.103/uas_spk/deteksi.php";
     String val_usia, val_jkel, val_keturunan, val_banyak_kencing, val_turun_bb, val_luka_sukar, val_kesemutan, val_lemas, val_kulit_gatal ;
     ImageView btn_close;
     RelativeLayout header;
@@ -217,20 +221,29 @@ public class DeteksiDiabetes extends AppCompatActivity {
 
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
 
-        JSONObject postData = new JSONObject();
-        try {
-            postData.put("usia", val_usia);
-            postData.put("jkel", val_jkel);
-            postData.put("keturunan", val_keturunan);
-            postData.put("banyak_kencing", val_banyak_kencing);
-            postData.put("turun_bb", val_turun_bb);
-            postData.put("luka_sukar", val_luka_sukar);
-            postData.put("kesemutan", val_kesemutan);
-            postData.put("lemas", val_lemas);
-            postData.put("kulit_gatal", val_kulit_gatal);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+//        JSONObject postData = new JSONObject();
+//
+//
+//
+//        try {
+//            postData.put("usia", val_usia);
+//            postData.put("jkel", val_jkel);
+//            postData.put("keturunan", val_keturunan);
+//            postData.put("banyak_kencing", val_banyak_kencing);
+//            postData.put("turun_bb", val_turun_bb);
+//            postData.put("luka_sukar", val_luka_sukar);
+//            postData.put("kesemutan", val_kesemutan);
+//            postData.put("lemas", val_lemas);
+//            postData.put("kulit_gatal", val_kulit_gatal);
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+
+
+
+
+
+
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
@@ -249,18 +262,39 @@ public class DeteksiDiabetes extends AppCompatActivity {
                 hide_loading();
                 Fragment_deteksi_vonis fragment_deteksi_vonis = new Fragment_deteksi_vonis();
                 Bundle bundle = new Bundle();
-                bundle.putString("vonis","eror");
+                error.printStackTrace();
+                bundle.putString("vonis","eror response");
+                bundle.putString("err_msg",error.toString());
+//                bundle.putString("vonis",error.toString());
                 fragment_deteksi_vonis.setArguments(bundle);
                 getSupportFragmentManager().beginTransaction().add(R.id.fragment_container,fragment_deteksi_vonis).commit();
             }
 
-        });
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {Map<String,String> params = new HashMap<>();
+                params.put("usia", val_usia);
+                params.put("jkel", val_jkel);
+                params.put("keturunan", val_keturunan);
+                params.put("banyak_kencing", val_banyak_kencing);
+                params.put("turun_bb", val_turun_bb);
+                params.put("luka_sukar", val_luka_sukar);
+                params.put("kesemutan", val_kesemutan);
+                params.put("lemas", val_lemas);
+                params.put("kulit_gatal", val_kulit_gatal);
+                return params;
+            }
 
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("Content-Type","application/x-www-form-urlencoded");
+                return params;
+            }
+        };
         requestQueue.add(stringRequest);
 
     }
-
-
 
     void keluar_menu_deteksi(String vonis){
         btn_close.setColorFilter(getResources().getColor(R.color.white));
@@ -277,6 +311,4 @@ public class DeteksiDiabetes extends AppCompatActivity {
         }
         state_close = true;
     }
-
-
 }
