@@ -4,7 +4,7 @@
 > Repository ini merupakan project UAS mata kuliah `Sistem Pendukung Keputusan (SPK)` atau `Decision Suport System (DSS)` yang dikembangkan untuk tujuan memenuhi prasyarat mata kuliah SPK. Dataset yang digunakan sebagai acuan perhitungan diabetes disini merupakan `dataset dummy` yang digunakan untuk `tujuan edukasi`.  **⚠️ APLIKASI INI TIDAK DIGUNAKAN SEBAGAI ACUAN MEDIS ATAU TUJUAN KOMERSIAL⚠️** 
 
 ## 💬 Informasi
-Pengembangan aplikasi ini didasarkan pada materi pada kelas SPK yaitu penerapan Metode Naive Bayes Classifier (NBC) untuk mengkasifikasi penyakit diabetes berdasarkan beberapa kriteria gejala yang ditentukan. Pengembangan aplikasi SiDeDi ini mengacu pada publikasi jurnal yang sama yaitu [JSIKA - SiDedi (Sistem Informasi Deteksi Diabetes) : Sistem Pendukung Keputusan Deteksi Dini Diabetes](jurnalJSIKA).
+Pengembangan aplikasi ini didasarkan pada materi pada kelas SPK yaitu penerapan Metode [Naive Bayes Classifier (NBC)](https://towardsdatascience.com/naive-bayes-classifier-81d512f50a7c) untuk mengkasifikasi penyakit diabetes berdasarkan beberapa kriteria gejala yang ditentukan. Pengembangan aplikasi SiDeDi ini mengacu pada publikasi jurnal yang sama yaitu [JSIKA - SiDedi (Sistem Informasi Deteksi Diabetes) : Sistem Pendukung Keputusan Deteksi Dini Diabetes](https://www.dropbox.com/s/d12t67ayl5jv14e/Jurnal%20SiDeDi.pdf?dl=0).
 
 ## 👉 Petunjuk
 - Uji Coba aplikasi dapat diunduh pada halaman [berikut][appURL].
@@ -37,7 +37,6 @@ Pengembangan aplikasi ini didasarkan pada materi pada kelas SPK yaitu penerapan 
 - Reva Eka Prasetyo (1841010004) : [Instagram](https://www.instagram.com/revaekap/) | [Linkedin](https://www.linkedin.com/in/revaekap/)
 - Onastatia Sahartian (1841010016) : [Instagram](https://www.instagram.com/onastatia_/) | [Linkedin](https://www.linkedin.com/in/onastatia-sahartian-0229081ba/)
 
-[ref1]: <https://towardsdatascience.com/naive-bayes-classifier-81d512f50a7c>
-[jurnalJSIKA]: <https://www.dropbox.com/s/d12t67ayl5jv14e/Jurnal%20SiDeDi.pdf?dl=0>
+
 [appURL]: <>
 [repoWeb]: <>
