@@ -8,7 +8,7 @@ Pengembangan aplikasi ini didasarkan pada materi pada kelas SPK yaitu penerapan 
 
 ## 👉 Petunjuk
 - Uji Coba aplikasi dapat diunduh pada halaman [berikut][appURL].
-- Untuk dapat menggunakan sistem deteksi diabetes, repository ini memerlukan depedensi pada sistem REST API pada [repository ini]().
+- Untuk dapat menggunakan sistem deteksi diabetes, repository ini memerlukan depedensi pada sistem REST API pada [repository ini](https://github.com/apriantoa917/php-UAS_SPK-SiDeDi).
 - Ubah alamat IP pada file `Constanta.java` di repository ini dengan alamat IP server REST API dijalankan (cek dengan command line `ipconfig`. Halaman file [Constanta.java][fileGradleProperties] 
     ```java
    public class Constanta {
@@ -39,4 +39,4 @@ Pengembangan aplikasi ini didasarkan pada materi pada kelas SPK yaitu penerapan 
 
 
 [appURL]: <>
-[repoWeb]: <>
+
