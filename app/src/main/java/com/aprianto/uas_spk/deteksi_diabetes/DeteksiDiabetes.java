@@ -1,43 +1,32 @@
 package com.aprianto.uas_spk.deteksi_diabetes;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
+import androidx.appcompat.app.AppCompatActivity;
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.aprianto.uas_spk.R;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class DeteksiDiabetes extends AppCompatActivity {
-    public static final String url = "http://192.168.1.103/uas_spk/deteksi.php";
-    String val_usia, val_jkel, val_keturunan, val_banyak_kencing, val_turun_bb, val_luka_sukar, val_kesemutan, val_lemas, val_kulit_gatal ;
+    String val_usia, val_jkel, val_keturunan, val_banyak_kencing, val_turun_bb, val_luka_sukar, val_kesemutan, val_lemas, val_kulit_gatal;
     ImageView btn_close;
     RelativeLayout header;
     boolean state_close = false;
@@ -48,15 +37,16 @@ public class DeteksiDiabetes extends AppCompatActivity {
     ImageView ic_hasil_deteksi;
     TextView greetings_hasil_deteksi, kalimat_hasil_deteksi;
 
-
+    Constanta constanta;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_deteksi_diabetes);
+        constanta = new Constanta();
         getSupportActionBar().hide();
-        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container,new Fragment_deteksi_usia()).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, new Fragment_deteksi_usia()).commit();
 
         header = findViewById(R.id.header);
         btn_close = findViewById(R.id.btn_close);
@@ -72,9 +62,9 @@ public class DeteksiDiabetes extends AppCompatActivity {
         btn_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(state_close){
+                if (state_close) {
                     finish();
-                }else{
+                } else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(DeteksiDiabetes.this);
                     builder.setTitle("Batalkan deteksi");
                     builder.setMessage("Apakah anda akan meninggalkan halaman deteksi ?");
@@ -101,7 +91,7 @@ public class DeteksiDiabetes extends AppCompatActivity {
         });
         val_usia = "";
         val_jkel = "";
-        val_keturunan="";
+        val_keturunan = "";
         val_banyak_kencing = "";
         val_turun_bb = "";
         val_luka_sukar = "";
@@ -109,7 +99,7 @@ public class DeteksiDiabetes extends AppCompatActivity {
         val_lemas = "";
         val_kulit_gatal = "";
 
-        dialog  = new Dialog(DeteksiDiabetes.this);
+        dialog = new Dialog(DeteksiDiabetes.this);
         dialog.setContentView(R.layout.dialog_loading);
         WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
         params.width = WindowManager.LayoutParams.MATCH_PARENT;
@@ -120,36 +110,35 @@ public class DeteksiDiabetes extends AppCompatActivity {
 
     }
 
-    void show_loading(){
+    void show_loading() {
         this.dialog.show();
     }
 
-    void hide_loading(){
+    void hide_loading() {
         this.dialog.dismiss();
     }
 
 
-
-    String testDialog(){
-        return "Hasil \n " +"\n " +
-                "------------------ \n"+
-                "Usia anda : "+val_usia+"\n " +
-                "Jkel anda : "+val_jkel+"\n " +
-                "Keturunan : "+val_keturunan+"\n " +
-                "Banyak kencing : "+val_banyak_kencing+"\n " +
-                "Turun Berat Badan : "+val_turun_bb+"\n " +
-                "Luka Sukar Sembuh : "+val_luka_sukar+"\n " +
-                "Kesemutan : "+val_kesemutan+"\n " +
-                "Lemas : "+val_lemas+"\n " +
-                "Kulit Gatal : "+val_kulit_gatal;
+    String testDialog() {
+        return "Hasil \n " + "\n " +
+                "------------------ \n" +
+                "Usia anda : " + val_usia + "\n " +
+                "Jkel anda : " + val_jkel + "\n " +
+                "Keturunan : " + val_keturunan + "\n " +
+                "Banyak kencing : " + val_banyak_kencing + "\n " +
+                "Turun Berat Badan : " + val_turun_bb + "\n " +
+                "Luka Sukar Sembuh : " + val_luka_sukar + "\n " +
+                "Kesemutan : " + val_kesemutan + "\n " +
+                "Lemas : " + val_lemas + "\n " +
+                "Kulit Gatal : " + val_kulit_gatal;
     }
 
-    void setVariabelValue(String variabel, String value){
-        switch (variabel){
-            case "usia" :
+    void setVariabelValue(String variabel, String value) {
+        switch (variabel) {
+            case "usia":
                 val_usia = value;
                 break;
-            case "jkel" :
+            case "jkel":
                 val_jkel = value;
                 break;
             case "keturunan":
@@ -176,11 +165,11 @@ public class DeteksiDiabetes extends AppCompatActivity {
         }
     }
 
-    String getVariabelValue(String  variabel){
+    String getVariabelValue(String variabel) {
         String val = null;
-        switch (variabel){
+        switch (variabel) {
             case "usia":
-                val =  val_usia;
+                val = val_usia;
                 break;
             case "jkel":
                 val = val_jkel;
@@ -213,48 +202,21 @@ public class DeteksiDiabetes extends AppCompatActivity {
         return val;
     }
 
-    String outputs = "";
     String hasil_deteksi = "";
 
     public void deteksi() {
         show_loading();
-
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-
-//        JSONObject postData = new JSONObject();
-//
-//
-//
-//        try {
-//            postData.put("usia", val_usia);
-//            postData.put("jkel", val_jkel);
-//            postData.put("keturunan", val_keturunan);
-//            postData.put("banyak_kencing", val_banyak_kencing);
-//            postData.put("turun_bb", val_turun_bb);
-//            postData.put("luka_sukar", val_luka_sukar);
-//            postData.put("kesemutan", val_kesemutan);
-//            postData.put("lemas", val_lemas);
-//            postData.put("kulit_gatal", val_kulit_gatal);
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-
-
-
-
-
-
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, constanta.URL_DETEKSI,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         hide_loading();
                         Fragment_deteksi_vonis fragment_deteksi_vonis = new Fragment_deteksi_vonis();
                         Bundle bundle = new Bundle();
-                        bundle.putString("vonis",response);
+                        bundle.putString("vonis", response);
                         fragment_deteksi_vonis.setArguments(bundle);
-                        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container,fragment_deteksi_vonis).commit();
+                        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, fragment_deteksi_vonis).commit();
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -263,16 +225,15 @@ public class DeteksiDiabetes extends AppCompatActivity {
                 Fragment_deteksi_vonis fragment_deteksi_vonis = new Fragment_deteksi_vonis();
                 Bundle bundle = new Bundle();
                 error.printStackTrace();
-                bundle.putString("vonis","eror response");
-                bundle.putString("err_msg",error.toString());
-//                bundle.putString("vonis",error.toString());
+                bundle.putString("vonis", "eror response");
+                bundle.putString("err_msg", error.toString());
                 fragment_deteksi_vonis.setArguments(bundle);
-                getSupportFragmentManager().beginTransaction().add(R.id.fragment_container,fragment_deteksi_vonis).commit();
+                getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, fragment_deteksi_vonis).commit();
             }
-
-        }){
+        }) {
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {Map<String,String> params = new HashMap<>();
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
                 params.put("usia", val_usia);
                 params.put("jkel", val_jkel);
                 params.put("keturunan", val_keturunan);
@@ -284,21 +245,21 @@ public class DeteksiDiabetes extends AppCompatActivity {
                 params.put("kulit_gatal", val_kulit_gatal);
                 return params;
             }
-
             @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String,String> params = new HashMap<String, String>();
-                params.put("Content-Type","application/x-www-form-urlencoded");
+            public Map<String, String> getHeaders() {
+                Map<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
                 return params;
             }
         };
+        // tambahan waktu untuk proses kalkulasi 10 seconds
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(20 * 1000, 1, 1.0f));
         requestQueue.add(stringRequest);
-
     }
 
-    void keluar_menu_deteksi(String vonis){
+    void keluar_menu_deteksi(String vonis) {
         btn_close.setColorFilter(getResources().getColor(R.color.white));
-        switch (vonis){
+        switch (vonis) {
             case "ya":
                 header.setBackgroundColor(getResources().getColor(R.color.red));
                 break;
