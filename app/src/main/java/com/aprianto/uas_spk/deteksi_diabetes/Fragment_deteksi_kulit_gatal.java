@@ -1,5 +1,6 @@
 package com.aprianto.uas_spk.deteksi_diabetes;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,7 @@ public class Fragment_deteksi_kulit_gatal extends Fragment {
     TextView tv_yes, tv_no, tv_question;
 
 
+    @SuppressLint({"SetTextI18n", "UseCompatLoadingForDrawables"})
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -52,21 +54,21 @@ public class Fragment_deteksi_kulit_gatal extends Fragment {
         kulit_gatal_yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                next_question("kulit_gatal", "ya");
+                next_question("ya");
             }
         });
         kulit_gatal_no.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                next_question("kulit_gatal", "tidak");
+                next_question("tidak");
             }
         });
         setStateButton();
         return view;
     }
     
-    void next_question(String var, String val) {
-        ((DeteksiDiabetes) getActivity()).setVariabelValue(var, val);
+    void next_question(String val) {
+        ((DeteksiDiabetes) getActivity()).setVariabelValue("kulit_gatal", val);
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Fragment_deteksi_kesemutan()).commit();
     }
 

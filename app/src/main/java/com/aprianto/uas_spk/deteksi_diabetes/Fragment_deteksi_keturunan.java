@@ -1,7 +1,6 @@
 package com.aprianto.uas_spk.deteksi_diabetes;
 
-import android.app.AlertDialog;
-import android.content.Context;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +20,7 @@ public class Fragment_deteksi_keturunan extends Fragment {
     ImageView keturunan_yes, keturunan_no, ic_yes, ic_no, icon;
     TextView tv_yes, tv_no, tv_question;
 
+    @SuppressLint({"UseCompatLoadingForDrawables", "SetTextI18n"})
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -48,21 +48,21 @@ public class Fragment_deteksi_keturunan extends Fragment {
         keturunan_yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                next_question("keturunan", "ya");
+                next_question("ya");
             }
         });
         keturunan_no.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                next_question("keturunan", "tidak");
+                next_question("tidak");
             }
         });
         setStateButton();
         return view;
     }
 
-    void next_question(String var, String val) {
-        ((DeteksiDiabetes) getActivity()).setVariabelValue(var, val);
+    void next_question(String val) {
+        ((DeteksiDiabetes) getActivity()).setVariabelValue("keturunan", val);
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Fragment_deteksi_banyak_kencing()).commit();
     }
 
@@ -79,6 +79,7 @@ public class Fragment_deteksi_keturunan extends Fragment {
         }
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     void setClickedButton(ImageView button, ImageView icon, TextView tv, String value, String state) {
         if (state.equalsIgnoreCase("clicked")) {
 //            button.setBackground(getResources().getDrawable(R.drawable.custom_button_clicked));

@@ -1,7 +1,6 @@
 package com.aprianto.uas_spk.deteksi_diabetes;
 
-import android.app.AlertDialog;
-import android.content.Context;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,11 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import com.aprianto.uas_spk.R;
 
 public class Fragment_deteksi_banyak_kencing extends Fragment {
@@ -22,6 +19,7 @@ public class Fragment_deteksi_banyak_kencing extends Fragment {
     TextView tv_yes, tv_no, tv_question;
 
 
+    @SuppressLint({"SetTextI18n", "UseCompatLoadingForDrawables"})
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -54,21 +52,21 @@ public class Fragment_deteksi_banyak_kencing extends Fragment {
         banyak_kencing_yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                next_question("banyak_kencing", "ya");
+                next_question("ya");
             }
         });
         banyak_kencing_no.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                next_question("banyak_kencing", "tidak");
+                next_question("tidak");
             }
         });
         setStateButton();
         return view;
     }
 
-    void next_question(String var, String val) {
-        ((DeteksiDiabetes) getActivity()).setVariabelValue(var, val);
+    void next_question(String val) {
+        ((DeteksiDiabetes) getActivity()).setVariabelValue("banyak_kencing", val);
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Fragment_deteksi_turun_bb()).commit();
     }
 
@@ -86,6 +84,7 @@ public class Fragment_deteksi_banyak_kencing extends Fragment {
         }
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     void setClickedButton(ImageView button, ImageView icon, TextView tv, String value, String state) {
         if (state.equalsIgnoreCase("clicked")) {
             button.setBackground(getResources().getDrawable(R.drawable.custom_button_clicked));

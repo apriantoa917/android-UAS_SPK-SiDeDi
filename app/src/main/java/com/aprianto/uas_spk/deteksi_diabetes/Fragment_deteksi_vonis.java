@@ -1,5 +1,6 @@
 package com.aprianto.uas_spk.deteksi_diabetes;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +20,6 @@ public class Fragment_deteksi_vonis extends Fragment {
     RelativeLayout bg_hasil_deteksi;
     ImageView ic_hasil_deteksi;
     TextView tv_greetings_deteksi, tv_detail_deteksi;
-
     TextView
             hasil_usia,
             hasil_jkel,
@@ -30,7 +30,6 @@ public class Fragment_deteksi_vonis extends Fragment {
             hasil_lemas,
             hasil_kulit_gatal,
             hasil_kesemutan;
-
     String vonis;
 
 
@@ -69,6 +68,7 @@ public class Fragment_deteksi_vonis extends Fragment {
         return view;
     }
 
+    @SuppressLint({"SetTextI18n", "UseCompatLoadingForDrawables"})
     void set_layout(String vonis) {
         switch (vonis) {
             case "ya":

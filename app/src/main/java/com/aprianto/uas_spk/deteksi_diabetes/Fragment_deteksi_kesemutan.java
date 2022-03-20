@@ -1,7 +1,6 @@
 package com.aprianto.uas_spk.deteksi_diabetes;
 
-import android.app.AlertDialog;
-import android.content.Context;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +21,7 @@ public class Fragment_deteksi_kesemutan extends Fragment {
     TextView tv_yes, tv_no, tv_question;
 
 
+    @SuppressLint({"SetTextI18n", "UseCompatLoadingForDrawables"})
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -64,38 +64,26 @@ public class Fragment_deteksi_kesemutan extends Fragment {
         kesemutan_yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish("kesemutan", "ya");
+                finish("ya");
             }
         });
         kesemutan_no.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish("kesemutan", "tidak");
+                finish("tidak");
             }
         });
         setStateButton();
         return view;
     }
     
-    void finish(String var, String val) {
-        ((DeteksiDiabetes) getActivity()).setVariabelValue(var, val);
+    void finish(String val) {
+        ((DeteksiDiabetes) getActivity()).setVariabelValue("kesemutan", val);
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Fragment_deteksi_kesemutan()).commit();
     }
 
-    void showDialog(Context context) {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
-        // set title dialog
-        alertDialogBuilder.setTitle("HASIL TEST DIABETES");
-        // set pesan dari dialog
-        alertDialogBuilder
-                .setMessage(((DeteksiDiabetes) getActivity()).testDialog())
-                .setCancelable(true);
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
 
-    }
-
-
+    @SuppressLint("UseCompatLoadingForDrawables")
     void setStateButton() {
         String val = ((DeteksiDiabetes) getActivity()).getVariabelValue("kesemutan");
         if (val.isEmpty()) {

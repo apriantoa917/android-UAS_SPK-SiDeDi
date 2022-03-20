@@ -81,10 +81,6 @@ public class Fragment_deteksi_usia extends Fragment {
 
     }
 
-
-
-
-
     void next(){
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new Fragment_deteksi_jkel()).commit();
     }

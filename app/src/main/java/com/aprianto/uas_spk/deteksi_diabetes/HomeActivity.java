@@ -1,23 +1,23 @@
 package com.aprianto.uas_spk.deteksi_diabetes;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.aprianto.uas_spk.R;
 import com.aprianto.uas_spk.deteksi_diabetes.konten_berita.model;
@@ -40,7 +40,7 @@ public class HomeActivity extends AppCompatActivity {
     ArrayList<com.aprianto.uas_spk.deteksi_diabetes.konten_berita.model> list = new ArrayList<>();
     DatabaseReference db;
     RecyclerView rv;
-    ImageView c1,c2,c3,c4, btn_info, btn_close_info;
+    ImageView c1, c2, c3, c4, btn_info, btn_close_info;
     ProgressBar progressBar;
     TextView label_greetings;
 
@@ -56,6 +56,8 @@ public class HomeActivity extends AppCompatActivity {
         c3 = findViewById(R.id.card3);
         c4 = findViewById(R.id.card4);
         btn_info = findViewById(R.id.btn_info);
+
+        final Constanta constanta = new Constanta();
 
         progressBar = findViewById(R.id.progressbar);
         progressBar.setVisibility(View.VISIBLE);
@@ -73,19 +75,19 @@ public class HomeActivity extends AppCompatActivity {
         c2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                load_webview("https://uas-spk.web.app/pengertian_diabetes.html");
+                load_webview(constanta.URL_PENGERTIAN);
             }
         });
         c3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                load_webview("https://uas-spk.web.app/gejala_diabetes.html");
+                load_webview(constanta.URL_GEJALA);
             }
         });
         c4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                load_webview("https://uas-spk.web.app/tips_diabetes.html");
+                load_webview(constanta.URL_TIPS);
             }
         });
 
@@ -93,7 +95,7 @@ public class HomeActivity extends AppCompatActivity {
         btn_info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialog  = new Dialog(HomeActivity.this);
+                dialog = new Dialog(HomeActivity.this);
                 dialog.setContentView(R.layout.dialog_info_apps);
                 WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
                 params.width = WindowManager.LayoutParams.MATCH_PARENT;
@@ -109,7 +111,7 @@ public class HomeActivity extends AppCompatActivity {
                 ic_apri.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        load_webview("http://instagram.com/aprianto.si");
+                        load_webview("http://instagram.com/apriantoa917");
                     }
                 });
                 ic_reva.setOnClickListener(new View.OnClickListener() {
@@ -150,9 +152,9 @@ public class HomeActivity extends AppCompatActivity {
         load_rv(rv);
     }
 
-    void load_webview(String url){
+    void load_webview(String url) {
         Intent intent = new Intent(this, WebviewActivity.class);
-        intent.putExtra("url",url);
+        intent.putExtra("url", url);
         this.startActivity(intent);
     }
 
@@ -169,7 +171,6 @@ public class HomeActivity extends AppCompatActivity {
                     String url_berita = data.child("url_berita").getValue().toString();
                     String icon_berita = data.child("icon_berita").getValue().toString();
                     String foto_berita = data.child("foto_berita").getValue().toString();
-//                    Log.e("ic_apri",judul_berita);
                     model model = new model();
                     model.setJudul_berita(judul_berita);
                     model.setUrl_berita(url_berita);
@@ -180,9 +181,9 @@ public class HomeActivity extends AppCompatActivity {
                 rv_adapter rv_adapter = new rv_adapter(list);
                 rv.setAdapter(rv_adapter);
                 progressBar.setVisibility(View.INVISIBLE);
-                if (snapshot.exists()) {
-                }
+                snapshot.exists();
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
@@ -191,6 +192,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private void load_greetings() {
         Calendar c = Calendar.getInstance();
+        @SuppressLint("SimpleDateFormat")
         SimpleDateFormat sdf = new SimpleDateFormat("HH");
         String status = "Selamat Datang,";
         int jam = Integer.parseInt(sdf.format(c.getTime()));

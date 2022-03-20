@@ -1,5 +1,6 @@
 package com.aprianto.uas_spk.deteksi_diabetes;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,7 @@ public class Fragment_deteksi_luka_sukar extends Fragment {
     TextView tv_yes, tv_no, tv_question;
 
 
+    @SuppressLint("SetTextI18n")
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -52,21 +54,21 @@ public class Fragment_deteksi_luka_sukar extends Fragment {
         luka_sukar_yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                next_question("luka_sukar", "ya");
+                next_question("ya");
             }
         });
         luka_sukar_no.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                next_question("luka_sukar", "tidak");
+                next_question("tidak");
             }
         });
         setStateButton();
         return view;
     }
     
-    void next_question(String var, String val) {
-        ((DeteksiDiabetes) getActivity()).setVariabelValue(var, val);
+    void next_question(String val) {
+        ((DeteksiDiabetes) getActivity()).setVariabelValue("luka_sukar", val);
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Fragment_deteksi_lemas()).commit();
     }
 
@@ -84,6 +86,7 @@ public class Fragment_deteksi_luka_sukar extends Fragment {
         }
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     void setClickedButton(ImageView button, ImageView icon, TextView tv, String value, String state) {
         if (state.equalsIgnoreCase("clicked")) {
             button.setBackground(getResources().getDrawable(R.drawable.custom_button_clicked));
